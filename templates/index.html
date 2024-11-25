@@ -23,63 +23,39 @@
             background-color: #4CAF50;
             color: white;
             border: none;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             margin: 10px;
         }
 
-        button:hover {
-            background-color: #45a049;
-        }
-
-        #message {
+        #response {
             margin-top: 20px;
             font-size: 18px;
-            color: #333;
         }
     </style>
 </head>
 
 <body>
-    <button id="turnOnButton">Turn On LED</button>
-    <button id="turnOffButton">Turn Off LED</button>
-    <div id="message"></div>
+    <h1>Pin Control</h1>
+    <button id="pinOnButton">Turn Pin On</button>
+    <button id="pinOffButton">Turn Pin Off</button>
+    <p id="response"></p>
 
     <script>
-        document.getElementById('turnOnButton').addEventListener('click', function () {
+        document.getElementById('pinOnButton').addEventListener('click', function () {
             fetch('/pinon')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text();
-                })
+                .then(response => response.text())
                 .then(data => {
-                    console.log('Success:', data);
-                    document.getElementById('message').innerText = data;
+                    document.getElementById('response').innerText = data;
                 })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                    document.getElementById('message').innerText = 'Request failed: ' + error.message;
-                });
+                .catch(error => console.error('Error:', error));
         });
 
-        document.getElementById('turnOffButton').addEventListener('click', function () {
+        document.getElementById('pinOffButton').addEventListener('click', function () {
             fetch('/pinoff')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok ' + response.statusText);
-                    }
-                    return response.text(); // Correctly placed return statement
-                })
+                .then(response => response.text())
                 .then(data => {
-                    console.log('Success:', data);
-                    document.getElementById('message').innerText = data;
+                    document.getElementById('response').innerText = data;
                 })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                    document.getElementById('message').innerText = 'Request failed: ' + error.message;
-                });
+                .catch(error => console.error('Error:', error));
         });
     </script>
 </body>
