@@ -1,6 +1,7 @@
 const path = require('path');
 
 module.exports = {
+    mode: 'production',
     entry: './src/dashboard.tsx',
     module: {
         rules: [
@@ -16,7 +17,6 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'static'),
+        path: path.resolve(__dirname, 'dist'),
     },
 };
-

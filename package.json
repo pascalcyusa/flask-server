@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
     "build:css": "npx tailwindcss -i ./src/styles.css -o ./dist/styles.css --minify",
-    "build:js": "babel src --out-dir dist --presets @babel/preset-env,@babel/preset-react"
+    "build:js": "webpack --config webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -32,7 +32,7 @@
     "tailwindcss": "^3.4.15",
     "ts-loader": "^9.4.3",
     "typescript": "^5.7.2",
-    "webpack": "^5.88.0",
+    "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
