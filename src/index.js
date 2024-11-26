@@ -1,4 +1,3 @@
-{% raw %}
 function Dashboard() {
     const [speed, setSpeed] = useState(0);
     const [direction, setDirection] = useState(null);
@@ -52,4 +51,3 @@ function Dashboard() {
 }
 
 ReactDOM.render(<Dashboard />, document.getElementById('root'));
-{% endraw %}
