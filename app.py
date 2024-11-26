@@ -1,16 +1,11 @@
-from flask import Flask, render_template, jsonify, send_from_directory
+from flask import Flask, send_from_directory
 import RPi.GPIO as GPIO
-import os
 
 app = Flask(__name__, static_folder='dist')
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-
-# LED setup
-LED_PIN = 16
-GPIO.setup(LED_PIN, GPIO.OUT)
 
 # Robot car setup (adjust these pins according to your car's configuration)
 MOTOR_A_PIN = 17
@@ -24,21 +19,13 @@ def index():
     return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route('/<path:path>')
-def serve_static(path):
-    return send_from_directory(app.static_folder, path)
+@app.route('/dist/<path:path>')
+def send_dist(path):
+    return send_from_directory('dist', path)
 
 
-@app.route('/pinon')
-def pin_on():
-    GPIO.output(LED_PIN, GPIO.HIGH)
-    return "Pin is turned ON"
-
-
-@app.route('/pinoff')
-def pin_off():
-    GPIO.output(LED_PIN, GPIO.LOW)
-    return "Pin is turned OFF"
+if __name__ == '__main__':
+    app.run(debug=True)
 
 
 @app.route('/<command>')
