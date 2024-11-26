@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory
+from flask import Flask, send_from_directory, jsonify
 import RPi.GPIO as GPIO
 
 app = Flask(__name__, static_folder='dist')
