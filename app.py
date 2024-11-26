@@ -1,7 +1,7 @@
 from flask import Flask, send_from_directory, jsonify
 import RPi.GPIO as GPIO
 
-app = Flask(__name__, static_folder='dist')
+app = Flask(__name__, static_folder='dist', static_url_path='/')
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
@@ -19,13 +19,9 @@ def index():
     return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route('/dist/<path:path>')
+@app.route('/<path:path>')
 def send_dist(path):
-    return send_from_directory('dist', path)
-
-
-if __name__ == '__main__':
-    app.run(debug=True)
+    return send_from_directory(app.static_folder, path)
 
 
 @app.route('/<command>')
