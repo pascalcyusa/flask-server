@@ -4,6 +4,7 @@ import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 # Set up GPIO
+GPIO.setwarnings(False)
 GPIO.setmode(GPIO.BOARD)
 GPIO.setup(16, GPIO.OUT)
 GPIO.output(16, GPIO.LOW)  # Ensure the LED is off initially
@@ -32,4 +33,4 @@ def cleanup_gpio(exception):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5001)
+    app.run(host='0.0.0.0', port=5001, debug=True)
