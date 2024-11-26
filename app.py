@@ -2,7 +2,7 @@ from flask import Flask, render_template, jsonify, send_from_directory
 import RPi.GPIO as GPIO
 import os
 
-app = Flask(__name__, static_folder='static')
+app = Flask(__name__, static_folder='dist')
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)
@@ -21,12 +21,12 @@ GPIO.setup(MOTOR_B_PIN, GPIO.OUT)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return send_from_directory(app.static_folder, 'index.html')
 
 
-@app.route('/static/<path:path>')
-def send_static(path):
-    return send_from_directory('static', path)
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory(app.static_folder, path)
 
 
 @app.route('/pinon')
