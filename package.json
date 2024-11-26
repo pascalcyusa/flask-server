@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode production",
-    "build:css": "npx tailwindcss -i ./src/styles.css -o ./static/styles.css --minify"
+    "build:css": "npx tailwindcss -i ./src/styles.css -o ./static/styles.css --minify",
+    "build:js": "babel src --out-dir public --presets @babel/preset-env,@babel/preset-react"
   },
   "repository": {
     "type": "git",
