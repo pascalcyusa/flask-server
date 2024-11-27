@@ -4,11 +4,13 @@ import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 # Set up GPIO
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(16, GPIO.OUT)
-GPIO.output(16, GPIO.LOW)  # Ensure the LED is off initially
+def setup_gpio():
+    GPIO.setwarnings(False)
+    GPIO.setmode(GPIO.BOARD)
+    GPIO.setup(16, GPIO.OUT)
+    GPIO.output(16, GPIO.LOW)  # Ensure the LED is off initially
 
+setup_gpio()
 
 @app.route('/')
 def index():
@@ -17,12 +19,14 @@ def index():
 
 @app.route('/pinon')
 def pin_on():
+    setup_gpio()
     GPIO.output(16, GPIO.HIGH)  # Turn the LED on
     return 'I turned on the pin.'
 
 
 @app.route('/pinoff')
 def pin_off():
+    setup_gpio()
     GPIO.output(16, GPIO.LOW)  # Turn the LED off
     return 'I turned off the pin.'
 
