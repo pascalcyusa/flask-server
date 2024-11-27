@@ -4,13 +4,14 @@ import RPi.GPIO as GPIO
 app = Flask(__name__)
 
 # Set up GPIO
+
+
 def setup_gpio():
     GPIO.setwarnings(False)
     GPIO.setmode(GPIO.BOARD)
     GPIO.setup(16, GPIO.OUT)
     GPIO.output(16, GPIO.LOW)  # Ensure the LED is off initially
 
-setup_gpio()
 
 @app.route('/')
 def index():
